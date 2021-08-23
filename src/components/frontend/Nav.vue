@@ -24,7 +24,7 @@
         </nav>
 
         <!-- Mobile Menu -->
-        <div class="hidden absolute inset-x-0 top-0 p-2 transition origin-top transform md:hidden">
+        <div class="absolute inset-x-0 top-0 hidden p-2 transition origin-top transform md:hidden">
             <div class="overflow-hidden bg-white rounded-lg shadow-md ring-1 ring-black ring-opacity-5">
               <div class="flex items-center justify-between px-5 pt-4">
                 <div>
