@@ -67,6 +67,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="css">
+  .router-link-active, .router-link-exact-active{
+    color: green;
+  }
 </style>
