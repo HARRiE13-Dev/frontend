@@ -36,9 +36,7 @@
                 class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none"
                 type="text"
               />
-              <div v-if="v$.email.$error" class="mt-2 text-sm text-red-500">
-                {{ v$.email.$errors[0].$message }}
-              </div>
+             
 
               <label
                 class="block mt-3 mb-2 text-sm text-gray-700"
@@ -50,9 +48,7 @@
                 class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none"
                 type="password"
               />
-              <div v-if="v$.password.$error" class="mt-2 text-sm text-red-500">
-                {{ v$.password.$errors[0].$message }}
-              </div>
+       
 
               <button
                 @click="submitForm"
@@ -84,15 +80,15 @@
 </template>
 
 <script>
-import useValidate from "@vuelidate/core";
-import { required, email, minLength, helpers } from "@vuelidate/validators";
-import http from "@/services/AuthService";
+
+import axios from "axios";
+//import http from "@/services/AuthService";
 //import api from "@/services/testLogin";
 
 export default {
   data() {
     return {
-      v$: useValidate(),
+      
       email: "",
       password: "",
     };
@@ -100,67 +96,20 @@ export default {
 
   methods: {
     submitForm() {
-      // alert(id)
-      this.v$.$validate(); // checks all input
-      if (!this.v$.$error) {
-        // ถ้า validate ผ่านแล้ว
-        //alert("Form validate Success");
-
-        // api.get("Student",{
-        //   studentID: this.studentid
+     
+       axios.get('https://api.mju.ac.th/Student/API/STUDENTe8ee4f3759cc4763a8f231965a2da6db23052020/Program/0401')
+       .then((response)=>{
+           console.log(response.data);
+       })
+       .catch((err)=>{
+           console.log(err)
+       });
+     
           
-        //   // condition 
-        //   //If api mju == input => True 
-        //   //Login Success
-
-          
-        // });
-
-        //Call Api from laravel------------------------
-          http
-            .post("login", {
-              email: this.email,
-              password: this.password,
-            })
-            .then((response) => {
-              console.log(response.data);
-
-              //Data User LocalStorage
-              localStorage.setItem('user', JSON.stringify(response.data))
-              
-              // Login  Success => Dashboard
-              this.$router.push('backend')
-            })
-            .catch((error) => {
-              if (error.response) {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-              }
-            });
-        //-----------------------------------------
-          
-      } else {
-        //alert("Form validate fail!");
-      }
+    
     },
   },
 
-  validations() {
-    return {
-      email: {
-        required: helpers.withMessage("ป้อนอีเมลก่อน", required),
-        email: helpers.withMessage("รูปแบบอีเมลไม่ถูกต้อง", email),
-      },
-      password: {
-        required: helpers.withMessage("ป้อนรหัสผ่านก่อน", required),
-        minLength: helpers.withMessage(
-          ({ $params }) => `รหัสผ่านต้องไม่น้อยกว่า ${$params.min} ตัวอักษร`,
-          minLength(6)
-        ),
-      },
-    };
-  },
 };
 </script>
 <style></style>

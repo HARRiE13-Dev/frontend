@@ -11,6 +11,7 @@ import Contact from '@/views/frontend/Contact.vue'
 import Login from '@/views/frontend/Login.vue'
 import ForgotPassword from '@/views/frontend/ForgotPassword.vue'
 import Notfound from '@/views/frontend/Notfound.vue'
+import testApi from '@/views/frontend/testApi.vue'
 
 //Backend
 
@@ -137,6 +138,21 @@ const routes = [
     meta :{
       title: 'ลงทะเบียน',
       description: 'ลงทะเบียน'
+    }
+  },
+  {
+    path: '/testapi',
+    name: 'testApi',
+    component: FrontendLayout,
+    children:[
+      {
+        path: '',
+        component: testApi
+      }
+    ],
+    meta :{
+      title: 'test',
+      description: 'test'
     }
   },
 
