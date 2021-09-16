@@ -100,48 +100,70 @@ export default {
 
   methods: {
     submitForm() {
-      // alert(id)
-      this.v$.$validate(); // checks all input
+      this.v$.$validate();
       if (!this.v$.$error) {
-        // ถ้า validate ผ่านแล้ว
-        //alert("Form validate Success");
+        http
+          .post("login", {
+            email: this.email,
+            password: this.password,
+          })
+          .then((response) => {
+            console.log(response.data);
 
-        // api.get("Student",{
-        //   studentID: this.studentid
-          
-        //   // condition 
-        //   //If api mju == input => True 
-        //   //Login Success
+            //Data User LocalStorage
+            localStorage.setItem("user", JSON.stringify(response.data));
 
-          
-        // });
-
-        //Call Api from laravel------------------------
-          http
-            .post("login", {
-              email: this.email,
-              password: this.password,
-            })
-            .then((response) => {
-              console.log(response.data);
-
-              //Data User LocalStorage
-              localStorage.setItem('user', JSON.stringify(response.data))
-              
-              // Login  Success => Dashboard
-              this.$router.push('backend')
-            })
-            .catch((error) => {
-              if (error.response) {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-              }
+            const Toast = this.$swal.mixin({
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener("mouseenter", this.$swal.stopTimer);
+                toast.addEventListener("mouseleave", this.$swal.resumeTimer);
+              },
             });
-        //-----------------------------------------
-          
+
+            Toast.fire({
+              icon: "success",
+              title: "เข้าสู่ระบบสำเร็จ",
+            }).then(() => {
+              // Login  Success => Dashboard
+              this.$router.push("backend");
+            });
+          })
+          .catch((error) => {
+            if (error.response) {
+              // console.log(error.response.data);
+              // console.log(error.response.status);
+              // console.log(error.response.headers);
+              if (error.response.status == 401) {
+                //Call Sweet Alert
+                const Toast = this.$swal.mixin({
+                  toast: true,
+                  position: "top-end",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.addEventListener("mouseenter", this.$swal.stopTimer);
+                    toast.addEventListener(
+                      "mouseleave",
+                      this.$swal.resumeTimer
+                    );
+                  },
+                });
+
+                Toast.fire({
+                  icon: "error",
+                  title: "ข้อมูลไม่ถูกต้อง",
+                });
+              }
+            }
+          });
       } else {
-        //alert("Form validate fail!");
+        alert("Form validate fail!");
       }
     },
   },
