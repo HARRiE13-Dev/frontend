@@ -4,12 +4,15 @@ import router from './router'
 import store from './store'
 import '@/styles/tailwind.css'
 
-import VueSweetalert2 from 'vue-sweetalert2'
-import 'sweetalert2/dist/sweetalert2.min.css'
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
-//Create Constant Var
+// สร้างตัวแปรมาเก็บ Constant ของ Vue
 const app = createApp(App)
+
 app.use(store)
 app.use(router)
-app.use(VueSweetalert2)
+
+app.use(VueSweetalert2);
+
 app.mount('#app')

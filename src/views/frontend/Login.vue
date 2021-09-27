@@ -135,10 +135,10 @@ export default {
           })
           .catch((error) => {
             if (error.response) {
-              // console.log(error.response.data);
-              // console.log(error.response.status);
-              // console.log(error.response.headers);
-              if (error.response.status == 401) {
+              //  console.log(error.response.data);
+              //  console.log(error.response.status);
+              //  console.log(error.response.headers);
+              if (error.response.status == 500) {
                 //Call Sweet Alert
                 const Toast = this.$swal.mixin({
                   toast: true,

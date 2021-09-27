@@ -1,168 +1,186 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-//import Views------------------------------
-//Frontend
+// Import Layouts
+import FrontendLayout from '@/layouts/Frontend.vue'
+import BackendLayout from '@/layouts/Backend.vue'
+
+// Import Views
+// Frontend
 import Home from '@/views/frontend/Home.vue'
 import About from '@/views/frontend/About.vue'
-import Register from '@/views/frontend/Register.vue'
 import Portfolio from '@/views/frontend/Portfolio.vue'
 import Service from '@/views/frontend/Service.vue'
 import Contact from '@/views/frontend/Contact.vue'
+import Register from '@/views/frontend/Register.vue'
 import Login from '@/views/frontend/Login.vue'
 import ForgotPassword from '@/views/frontend/ForgotPassword.vue'
-import Notfound from '@/views/frontend/Notfound.vue'
-import testApi from '@/views/frontend/testApi.vue'
+import NotFound404 from '@/views/frontend/Notfound.vue'
 
-//Backend
-
-//import Layouts-------------------------------
-import FrontendLayout from '@/layouts/Frontend.vue'
-
+// Backend
+import Dashbaord from '@/views/backend/Dashboard.vue'
+import Products from '@/views/backend/Products.vue'
 
 const routes = [
+
+  /** Frontend Route */
   {
     path: '/',
     name: 'Home',
     component: FrontendLayout,
-    children:[
+    children: [
       {
         path: '',
         component: Home
       }
     ],
-    meta :{
+    meta: {
       title: 'หน้าหลัก',
-      description: 'หน้าหลัก'
+      description: 'หน้าหลักระบบคงคลังสินค้า'
     }
   },
   {
     path: '/about',
     name: 'About',
     component: FrontendLayout,
-    children:[
+    children: [
       {
         path: '',
         component: About
       }
     ],
-    meta :{
+    meta: {
       title: 'เกี่ยวกับเรา',
-      description: 'เกี่ยวกับเรา'
+      description: 'รายละเอียดหน้าเกี่ยวกับเรา'
     }
   },
   {
     path: '/portfolio',
     name: 'Portfolio',
     component: FrontendLayout,
-    children:[
+    children: [
       {
         path: '',
         component: Portfolio
       }
     ],
-    meta :{
-      title: 'ผลงาน',
-      description: 'ผลงาน'
+    meta: {
+      title: 'ผลงานของเรา',
+      description: 'รายละเอียดหน้าผลงานของเรา'
     }
   },
   {
     path: '/service',
     name: 'Service',
     component: FrontendLayout,
-    children:[
+    children: [
       {
         path: '',
         component: Service
       }
     ],
-    meta :{
-      title: 'บริการ',
-      description: 'บริการ'
+    meta: {
+      title: 'บริการของเรา',
+      description: 'รายละเอียดหน้าบริการของเรา'
     }
   },
   {
     path: '/contact',
     name: 'Contact',
     component: FrontendLayout,
-    children:[
+    children: [
       {
         path: '',
         component: Contact
       }
     ],
-    meta :{
-      title: 'ติดต่อ',
-      description: 'ติดต่อ'
-    }
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: FrontendLayout,
-    children:[
-      {
-        path: '',
-        component: Login
-      }
-    ],
-    meta :{
-      title: 'เข้าสู่ระบบ',
-      description: 'เข้าสู่ระบบ'
-    }
-  },
-  {
-    path: '/forgotpassword',
-    name: 'ForgotPassword',
-    component: FrontendLayout,
-    children:[
-      {
-        path: '',
-        component: ForgotPassword
-      }
-    ],
-    meta :{
-      title: 'ลืมหรัสผ่าน',
-      description: 'ลืมหรัสผ่าน'
+    meta: {
+      title: 'ติดต่อเรา',
+      description: 'รายละเอียดหน้าติดต่อเรา'
     }
   },
   {
     path: '/register',
     name: 'Register',
     component: FrontendLayout,
-    children:[
+    children: [
       {
         path: '',
         component: Register
       }
     ],
-    meta :{
-      title: 'ลงทะเบียน',
-      description: 'ลงทะเบียน'
+    meta: {
+      title: 'สมัครสมาชิกใหม่',
+      description: 'รายละเอียดสมัครสมาชิกใหม่'
     }
   },
   {
-    path: '/testapi',
-    name: 'testApi',
+    path: '/login',
+    name: 'Login',
     component: FrontendLayout,
-    children:[
+    children: [
       {
         path: '',
-        component: testApi
+        component: Login
       }
     ],
-    meta :{
-      title: 'test',
-      description: 'test'
+    meta: {
+      title: 'เข้าสู่ระบบ',
+      description: 'รายละเอียดหน้าเข้าสู่ระบบ'
+    }
+  },
+  {
+    path: '/forgotpassword',
+    name: 'ForgotPassword',
+    component: FrontendLayout,
+    children: [
+      {
+        path: '',
+        component: ForgotPassword
+      }
+    ],
+    meta: {
+      title: 'ลืมรหัสผ่าน',
+      description: 'รายละเอียดหน้าลืมรหัสผ่าน'
     }
   },
 
-  //Error 404
+  // Error 404 
   {
     path: "/:catchAll(.*)",
-    component: Notfound,
-    meta :{
-      title: 'ไม่พบหน้า',
-      description: 'ไม่พบหน้า'
+    component: NotFound404,
+    meta: {
+      title: '404 ไม่พบหน้านี้',
+      description: 'รายละเอียดหน้า 404'
+    }
+  },
+
+  /** Frontend Route */
+  {
+    path: '/backend',
+    name: 'Dashboard',
+    component: BackendLayout,
+    children: [
+      {
+        path: '',
+        component: Dashbaord
+      }
+    ],
+    meta:{
+      title: 'Dashboard'
+    }
+  },
+  {
+    path: '/backend/products',
+    name: 'Products',
+    component: BackendLayout,
+    children: [
+      {
+        path: '',
+        component: Products
+      }
+    ],
+    meta:{
+      title: 'Products'
     }
   }
 
