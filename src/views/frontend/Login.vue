@@ -130,7 +130,8 @@ export default {
               title: "เข้าสู่ระบบสำเร็จ",
             }).then(() => {
               // Login  Success => Dashboard
-              this.$router.push("backend");
+              // window.location.href = '/backend'
+              this.$router.push({name:'Dashboard'})
             });
           })
           .catch((error) => {

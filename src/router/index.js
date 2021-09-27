@@ -14,22 +14,44 @@ import Contact from '@/views/frontend/Contact.vue'
 import Register from '@/views/frontend/Register.vue'
 import Login from '@/views/frontend/Login.vue'
 import ForgotPassword from '@/views/frontend/ForgotPassword.vue'
-import NotFound404 from '@/views/frontend/Notfound.vue'
+import NotFound404 from '@/views/frontend/NotFound404.vue'
 
 // Backend
 import Dashbaord from '@/views/backend/Dashboard.vue'
 import Products from '@/views/backend/Products.vue'
+
+// ทดสอบสร้างตัวแปรไว้เช็คว่า login หรือยัง
+// let state = false
+
+// สร้างฟังก์ชันสำหรับเช็ค route ก่อนเรียกใช้งาน (Route Auth Guard)
+function authGuard(to, from, next){
+  
+  let isAuthenticated = false
+
+  if(localStorage.getItem('user')){
+    isAuthenticated = true // ถ้ามีข้อมูล localStorage อยู่
+  }else{
+    isAuthenticated = false // ถ้าไม่มี localStorage
+  }
+
+  if(isAuthenticated){
+    next() // อนุญาติให้เข้าสู่ route และโหลด component ที่ต้องการได้
+  }else{
+    next({name: 'Login'})
+  }
+
+}
 
 const routes = [
 
   /** Frontend Route */
   {
     path: '/',
-    name: 'Home',
     component: FrontendLayout,
     children: [
       {
         path: '',
+        name: 'Home',
         component: Home
       }
     ],
@@ -40,11 +62,11 @@ const routes = [
   },
   {
     path: '/about',
-    name: 'About',
     component: FrontendLayout,
     children: [
       {
         path: '',
+        name: 'About',
         component: About
       }
     ],
@@ -55,11 +77,11 @@ const routes = [
   },
   {
     path: '/portfolio',
-    name: 'Portfolio',
     component: FrontendLayout,
     children: [
       {
         path: '',
+        name: 'Portfolio',
         component: Portfolio
       }
     ],
@@ -70,11 +92,11 @@ const routes = [
   },
   {
     path: '/service',
-    name: 'Service',
     component: FrontendLayout,
     children: [
       {
         path: '',
+        name: 'Service',
         component: Service
       }
     ],
@@ -85,11 +107,11 @@ const routes = [
   },
   {
     path: '/contact',
-    name: 'Contact',
     component: FrontendLayout,
     children: [
       {
         path: '',
+        name: 'Contact',
         component: Contact
       }
     ],
@@ -100,11 +122,11 @@ const routes = [
   },
   {
     path: '/register',
-    name: 'Register',
     component: FrontendLayout,
     children: [
       {
         path: '',
+        name: 'Register',
         component: Register
       }
     ],
@@ -115,11 +137,11 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'Login',
     component: FrontendLayout,
     children: [
       {
         path: '',
+        name: 'Login',
         component: Login
       }
     ],
@@ -130,11 +152,11 @@ const routes = [
   },
   {
     path: '/forgotpassword',
-    name: 'ForgotPassword',
     component: FrontendLayout,
     children: [
       {
         path: '',
+        name: 'ForgotPassword',
         component: ForgotPassword
       }
     ],
@@ -154,15 +176,23 @@ const routes = [
     }
   },
 
-  /** Frontend Route */
+  /** Backend Route */
   {
     path: '/backend',
-    name: 'Dashboard',
     component: BackendLayout,
     children: [
       {
         path: '',
-        component: Dashbaord
+        name: 'Dashboard',
+        component: Dashbaord,
+        beforeEnter: authGuard
+        // beforeEnter: (to, from, next) => {
+        //   if(state){
+        //     next() // ให้โหลด component ที่เรากำลังเรียกใช้
+        //   }else{
+        //     next({name: 'Login'})
+        //   }
+        // }
       }
     ],
     meta:{
@@ -170,13 +200,22 @@ const routes = [
     }
   },
   {
-    path: '/backend/products',
-    name: 'Products',
+    path: '/backend',
+    // name: 'Products',
     component: BackendLayout,
     children: [
       {
-        path: '',
-        component: Products
+        path: 'products',
+        name: 'Products',
+        component: Products,
+        beforeEnter: authGuard
+        // beforeEnter: (to, from, next) => {
+        //   if(state){
+        //     next() // ให้โหลด component ที่เรากำลังเรียกใช้
+        //   }else{
+        //     next({name: 'Login'})
+        //   }
+        // }
       }
     ],
     meta:{

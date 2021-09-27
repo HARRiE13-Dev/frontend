@@ -31,7 +31,7 @@
                         <!-- Notification badge -->
                         <span aria-hidden="true" class="absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800"></span>
                     </button>
-                    <template>
+                    <template >
                         <ul class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700">
                         <li class="flex">
                             <a class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="#">
@@ -58,6 +58,7 @@
                 <!-- Profile menu -->
                 <li class="relative">
                 <button
+                    @click="onClickShowProfile"
                     class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
                     aria-label="Account"
                     aria-haspopup="true">
@@ -68,7 +69,7 @@
                     aria-hidden="true"
                     />
                 </button>
-                    <template>
+                    <template :class="{'block' : showProfileMenu }">
                         <ul class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
                         aria-label="submenu">
                         <li class="flex">
@@ -142,6 +143,17 @@
 
 <script>
 export default {
-    
+    data(){
+        return{
+            showProfileMenu : false,
+            showNotificationMenu : false,
+        }
+    },
+    methods: {
+        onClickShowProfile(){
+            this.showProfileMenu = !this.showProfileMenu;
+            this.showNotificationMenu = false;
+        }
+    },
 }
 </script>

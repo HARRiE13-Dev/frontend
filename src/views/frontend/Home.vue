@@ -12,6 +12,15 @@
             ระบบคงคลังสินค้าที่จะมาช่วยเติมเต็มระบบของคุณให้เติบโตได้อย่างมั่นคง
             เริ่มต้นใช้งานระบบได้ฟรี
           </p>
+          <p>
+            {{url}}
+          </p>
+          <p>
+            {{baseUrl}}
+          </p>
+          <p>
+            {{title}}
+          </p>
           <router-link
             to="/register"
             class="inline-block px-6 py-2 text-white bg-indigo-600 border-2 border-indigo-600 rounded-md hover:text-indigo-600 hover:bg-indigo-100"
@@ -33,7 +42,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return{
+      url : process.env.VUE_APP_URL,
+      baseUrl : process.env.VUE_APP_URL_API,
+      title : process.env.VUE_APP_TITLE
+    }
+  }
+};
 </script>
 
 <style></style>
