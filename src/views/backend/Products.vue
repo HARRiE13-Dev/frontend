@@ -442,6 +442,11 @@ export default {
         data.append("slug", this.slug);
         data.append("price", this.price);
         data.append("file", this.file);
+         http.post('products',
+                    data
+                ).then((response)=>{
+                    console.log(response)
+        });
       }
     },
   },
