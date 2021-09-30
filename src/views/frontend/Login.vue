@@ -87,7 +87,7 @@
 import useValidate from "@vuelidate/core";
 import { required, email, minLength, helpers } from "@vuelidate/validators";
 import http from "@/services/AuthService";
-//import api from "@/services/testLogin";
+
 
 export default {
   data() {
@@ -164,7 +164,7 @@ export default {
             }
           });
       } else {
-        alert("Form validate fail!");
+        alert("Form Validate fail!");
       }
     },
   },
