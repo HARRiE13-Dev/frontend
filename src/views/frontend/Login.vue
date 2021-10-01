@@ -50,6 +50,7 @@
                 class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none"
                 type="password"
               />
+              <button @click="submitForm" type="submit" class="hidden">Submit</button>
               <div v-if="v$.password.$error" class="mt-2 text-sm text-red-500">
                 {{ v$.password.$errors[0].$message }}
               </div>

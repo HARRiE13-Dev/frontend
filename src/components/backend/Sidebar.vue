@@ -70,8 +70,8 @@
 
   <!-- Mobile sidebar -->
   <!-- Backdrop -->
-  <aside
-    class="fixed inset-y-0 z-20 flex-shrink-0 hidden w-64 mt-16 overflow-y-auto bg-gray-100 dark:bg-gray-800 md:hidden"
+  <aside :class="{'hidden': this.$store.state.showSideMenu}"
+    class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-gray-100 dark:bg-gray-800 md:hidden"
   >
     <div class="py-4 text-gray-500 dark:text-gray-400">
       <a
@@ -86,7 +86,8 @@
             class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
             aria-hidden="true"
           ></span>
-          <a
+           <router-link
+            to="/backend"
             class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
             href="#"
           >
@@ -105,13 +106,14 @@
               ></path>
             </svg>
             <span class="ml-4">Dashboard</span>
-          </a>
+          </router-link>
         </li>
       </ul>
 
       <ul>
         <li class="relative px-6 py-3">
-          <a
+           <router-link
+            to="/backend/products"
             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
           >
             <svg
@@ -129,7 +131,7 @@
               ></path>
             </svg>
             <span class="ml-4">Products</span>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
